@@ -10,8 +10,22 @@ sequence whose values do not exceed four million,
 find the sum of the even-valued terms.
 '''
 
-def q2():
-    pass
+def fib():
+	'''
+	Taken from PEP-0225, and modified slightly.
+	'''
+	a,b = 1,1
+	while True:
+		yield b
+		a,b = b,a+b
 
 if __name__ == "__main__":
-    q2()
+	f = fib()
+	evens = 0
+	n = next(f)
+	while (n < 4000000):
+		if (n % 2 == 0):
+			evens += n
+		n = next(f)
+	print("Total:", evens)
+	
