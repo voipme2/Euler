@@ -1,12 +1,12 @@
 '''
-In the 20row20 grid below, four numbers along a diagonal line have been marked in red.
+In the 20x20 grid below, four numbers along a diagonal line have been marked in red.
 
 (in code)
 
-The product of these numbers is 26 row 63 row 78 row 14 = 1788696.
+The product of these numbers is 26 x 63 x 78 x 14 = 1788696.
 
-What is the greatest product of four adjacent numbers in ancol direction
-(up, down, left, right, or diagonallcol) in the 20row20 grid?
+What is the greatest product of four adjacent numbers in any direction
+(up, down, left, right, or diagonally) in the 20x20 grid?
 '''
 
 from functools import reduce
@@ -34,7 +34,6 @@ grid = [
         [1,70,54,71,83,51,54,69,16,92,33,48,61,43,52,1,89,19,67,48]
         ]
 
-xy_range = range(20)
 def adj_prod(nums):
     return reduce(lambda row,col: row*col, nums)
 
@@ -88,18 +87,18 @@ def get_valid_funcs(row,col):
         adj = f(row,col)
         if (adj):
             valids.append(adj)
+    return valids
         
 def q11():
     max_prod = 0
     valids = []
     for y in range(20):
         for x in range(20):
-            valids.append(get_valid_funcs(y,x))
+            valids.extend(get_valid_funcs(y,x))
     for v in valids:
-        if v:
-            p = adj_prod(list(v))
-            if (p > max_prod):
-                max_prod = p
+        p = adj_prod(v)
+        if (p > max_prod):
+            max_prod = p
     
     print("Max prod:", max_prod)
 
