@@ -2,6 +2,8 @@
 Contains some functions that I've used a few times.
 '''
 
+from functools import reduce
+
 # taken from http://stackoverflow.com/questions/567222/simple-prime-generator-in-python
 def gen_primes():
     """ 
@@ -71,10 +73,10 @@ def count_p_factors(pfacts):
             facts[p] = 1
         facts[p] += 1
 
-    total = 1
-    for k in facts.keys():
-        total *= facts[k]
-    return total
+    if len(facts.keys()) > 0:
+        return reduce(lambda x,y: x*y, facts.values())
+    return 1
+    
 
 def triangles():
     '''
