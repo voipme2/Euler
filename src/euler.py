@@ -1,7 +1,7 @@
 '''
 Contains some functions that I've used a few times.
 '''
-
+import sys
 from functools import reduce
 
 # taken from http://stackoverflow.com/questions/567222/simple-prime-generator-in-python
@@ -116,4 +116,23 @@ def pascal(rows):
             s = s * (row - v) * 1 / (v + 1)
             slist.append(int(s))
         triangle.append(slist)
-    return triangle        
+    return triangle
+
+def max_tri(triangle):
+    triangle.reverse()
+    for r_i in range(len(triangle) - 1):
+        row = triangle[r_i]
+        next_row = triangle[r_i + 1]
+        for i in range(len(row) - 1):
+            next_row[i] += max(row[i], row[i+1])
+    return triangle[-1][0]
+
+def parse_triangle(f):
+    tri = []
+    for l in f:
+        tri.append([int(n) for n in l.strip().split(" ") if len(n) > 0])
+    return tri
+  
+def solve_triangle(f):
+    return max_tri(parse_triangle(f))   
+    
