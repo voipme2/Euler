@@ -94,4 +94,26 @@ def triangles():
         yield total
         n += 1
         total += n
-        
+
+def pascal(rows):
+    '''
+    Returns a list of lists, which represent Pascal's triangle.
+
+    pascal(5):
+    [
+     [1],
+     [1, 1],
+     [1, 2, 1],
+     [1, 3, 3, 1],
+     [1, 4, 6, 4, 1]
+    ]
+    '''
+    triangle = []
+    for row in range(rows): 
+        s = 1
+        slist = [s]
+        for v in range(row):
+            s = s * (row - v) * 1 / (v + 1)
+            slist.append(int(s))
+        triangle.append(slist)
+    return triangle        
